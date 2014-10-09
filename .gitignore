@@ -1,0 +1,4 @@
+.bundle
+.grunt
+*.log
+node_modules
