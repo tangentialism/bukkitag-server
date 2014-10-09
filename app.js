@@ -11,8 +11,9 @@ var Tagger = require('./lib/bukkitagger');
 // fetch file
 
 var db = {}
-var t = new Tagger()
-t.process(config.get('sources'))
+var t = new Tagger(config.get('sources'));
+
+t.process()
 .then(function() {
   console.log(t.db);
 });
