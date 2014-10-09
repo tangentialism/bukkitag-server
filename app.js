@@ -26,7 +26,7 @@ app.get('/tag/:tag.json', function(req, res){
 
 t.process()
 .then(function() {
-  server = app.listen(3000, function() {
+  server = app.listen(process.env.PORT || 3000, function() {
     console.log('Listening on port %d', server.address().port);
   });
 });
