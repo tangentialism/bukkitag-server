@@ -1,6 +1,6 @@
 {
-  "name": "bukkitags",
-  "description": "A distributed tag db for bukkits",
+  "name": "bukkitag-server",
+  "description": "A simple proof-of-concept server to parse multiple JSON bukkit tag payloads",
   "author": "David Yee",
   "version": "0.0.0",
   "main": "app.js",
@@ -11,9 +11,8 @@
     "node": "0.10.x"
   },
   "dependencies": {
-    "bluebird": "^2.3.5",
+    "express": "4.x",
     "config": "^1.2.3",
-    "lodash": "^2.4.1",
-    "needle": "^0.7.10"
+    "taggregator": "git://github.com/tangentialism/taggregator#master"
   }
 }

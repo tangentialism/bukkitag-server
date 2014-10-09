@@ -1,19 +1,32 @@
-var util = require('util');
 var config = require('config');
-var _ = require('lodash');
-var Tagger = require('./lib/bukkitagger');
+var Taggregator = require('taggregator');
 
-// Each of your sources (or localhost)
-// if fully qualified file, fetch it
-// if just domain, fetch the bukkitags.json
-// Promise(parse and assert that the file is clean)
+var express = require('express');
+var app = express();
+var server;
 
-// fetch file
+var t = new Taggregator(config.get('sources'), {
+  tagWithFilename: true
+});
 
-var db = {}
-var t = new Tagger(config.get('sources'));
+app.get('/bukkitags.json', function(req, res){
+  res.json(t.db);
+});
+
+app.get('/tag/:tag.json', function(req, res){
+  var urls = t.db.tags[req.params.tag] || [];
+  res.json(
+    { 
+      "tags": [req.params.tag],
+      "urls": urls
+    }
+  );
+
+});
 
 t.process()
 .then(function() {
-  console.log(t.db);
+  server = app.listen(3000, function() {
+    console.log('Listening on port %d', server.address().port);
+  });
 });
